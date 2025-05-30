@@ -5,10 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +23,11 @@ jobs:
 
     - name: Compile Java files
       run: javac -d out $(find . -name "*.java")
+
+    - name: Package JAR
+      run: jar cf VehicleManagementSystem.jar -C out .
+
+    - name: Deploy application
+      run: |
+        echo "Deploying application..."
+        # Add your deploy commands here (e.g., scp, ssh, docker push)
